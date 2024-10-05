@@ -8,6 +8,8 @@ import com.example.ecommerceapp.R
 
 class HomeActivity : AppCompatActivity() {
 
+    private lateinit var userId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -19,6 +21,18 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, ApprovalListActivity::class.java)
             startActivity(intent)
         }
+
+        // Retrieve userId from LoginActivity
+        userId = intent.getStringExtra("userId") ?: ""
+
+        val productListButton = findViewById<LinearLayout>(R.id.productListButton)
+        productListButton.setOnClickListener {
+            // Pass the userId to ProductListActivity
+            val intent = Intent(this, ProductListActivity::class.java)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
+        }
+
 
         // You can add similar OnClickListeners for other buttons like Invoice, Quotations, etc.
     }

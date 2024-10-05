@@ -1,8 +1,10 @@
-package com.example.ecommerceapp.ui
+package com.example.ecommerceapp.views
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ecommerceapp.R
 import com.example.ecommerceapp.databinding.ActivityCartBinding
 import com.example.ecommerceapp.models.Cart
 
@@ -11,8 +13,10 @@ class CartActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCartBinding
     private lateinit var cartAdapter: CartAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
 
         // Initialize ViewBinding
         binding = ActivityCartBinding.inflate(layoutInflater)

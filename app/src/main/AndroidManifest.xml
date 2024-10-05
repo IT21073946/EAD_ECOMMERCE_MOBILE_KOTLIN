@@ -55,21 +55,28 @@
       
         <!-- ProductDetailActivity declaration -->
         <activity
-            android:name=".ui.ProductDetailActivity"
+            android:name=".views.ProductDetailActivity"
             android:exported="true"
             android:label="Product Detail"
             android:theme="@style/Theme.ECommerceApp" />
 
+        <!-- ProductListActivity Page -->
+        <activity
+            android:name=".views.ProductListActivity"
+            android:exported="true"
+            android:label="Products"
+            android:theme="@style/Theme.ECommerceApp" />
+
         <!-- Register VendorRatingActivity -->
         <activity
-            android:name=".ui.VendorRatingActivity"
+            android:name=".views.VendorRatingActivity"
             android:exported="true"
             android:label="Vendor Rating"
             android:theme="@style/Theme.ECommerceApp" />
 
         <!-- Register CartActivity -->
         <activity
-            android:name=".ui.CartActivity"
+            android:name=".views.CartActivity"
             android:exported="true"
             android:label="Cart"
             android:theme="@style/Theme.ECommerceApp" />

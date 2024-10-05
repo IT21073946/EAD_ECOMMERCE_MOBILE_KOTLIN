@@ -5,6 +5,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Display userId -->
+    <TextView
+        android:id="@+id/userIdTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User ID"
+        android:textSize="18sp"
+        android:paddingBottom="16dp" />
+
     <TextView
         android:id="@+id/cart_title"
         android:layout_width="wrap_content"

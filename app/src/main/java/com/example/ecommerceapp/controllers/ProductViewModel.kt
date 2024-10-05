@@ -3,8 +3,6 @@ package com.example.ecommerceapp.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ecommerceapp.models.Product
-import com.example.ecommerceapp.network.ApiClient
-import com.example.ecommerceapp.network.ProductApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
