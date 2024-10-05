@@ -8,5 +8,5 @@ data class Product(
     val description: String,
     val price: Double,
     val imageUrl: String,
-    val vendorId: String = "66edabc4692d23e8ebfdec69"
+    val vendorId: String,
 ): Serializable

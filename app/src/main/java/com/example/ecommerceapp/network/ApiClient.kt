@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val BASE_URL = "https://67b3-2402-4000-20c3-82f1-d898-53ff-feb8-ebf2.ngrok-free.app/"  // Add https://
+    private const val BASE_URL = "https://11fc-2402-4000-21c3-fa22-1a9-ca12-184-52e2.ngrok-free.app"  // Add https://
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()

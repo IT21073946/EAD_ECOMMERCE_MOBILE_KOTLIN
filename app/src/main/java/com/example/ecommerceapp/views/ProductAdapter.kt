@@ -12,12 +12,12 @@ class ProductAdapter(
     private val onProductClick: (Product) -> Unit
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    // ViewHolder using View Binding
     inner class ProductViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
             binding.productName.text = product.productName
+            binding.productPrice.text = "$${product.price}"
             Picasso.get().load(product.imageUrl).into(binding.productImage)
             binding.root.setOnClickListener {
                 onProductClick(product)
@@ -26,7 +26,6 @@ class ProductAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        // Inflate the item layout using View Binding
         val binding = ItemProductBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
