@@ -21,7 +21,8 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        userController = UserController()
+        userController = UserController(this)
+
 
         // Initialize views
         usernameInput = findViewById(R.id.usernameInput)

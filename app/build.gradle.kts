@@ -64,12 +64,15 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
+    implementation(libs.androidx.gridlayout)
+    
+    
     // Firebase dependencies
     implementation(libs.firebase.inappmessaging)
     implementation(libs.firebase.firestore.ktx)
 
-    // Testing
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

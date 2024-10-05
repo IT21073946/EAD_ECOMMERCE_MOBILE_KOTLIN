@@ -6,34 +6,53 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.ECommerceApp"
-        tools:targetApi="31">
+        android:name=".AppContext"
+    android:allowBackup="true"
+    android:dataExtractionRules="@xml/data_extraction_rules"
+    android:fullBackupContent="@xml/backup_rules"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.ECommerceApp.NoActionBar"
+    tools:targetApi="31">
 
-        <!-- RegisterActivity is the launcher activity -->
-        <activity
-            android:name=".views.ProductListActivity"
+    <!-- RegisterActivity is the launcher activity -->
+    <activity
+        android:name=".views.LoginActivity"
         android:exported="true"
         android:label="@string/app_name"
-        android:theme="@style/Theme.ECommerceApp">
+        android:theme="@style/Theme.ECommerceApp.NoActionBar">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-        <!-- MainActivity (not the launcher anymore) -->
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.ECommerceApp" />
 
+    <!-- MainActivity (not the launcher anymore) -->
+    <activity
+        android:name=".MainActivity"
+        android:exported="true"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.ECommerceApp.NoActionBar" />
+
+    <activity
+        android:name=".views.HomeActivity"
+        android:exported="true"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.ECommerceApp.NoActionBar" />
+
+    <activity
+        android:name=".views.RegisterActivity"
+        android:exported="true"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.ECommerceApp.NoActionBar" />
+
+    <activity
+        android:name=".views.ApprovalListActivity"
+        android:exported="true"
+        android:label="Approval List" />
+      
         <!-- ProductDetailActivity declaration -->
         <activity
             android:name=".ui.ProductDetailActivity"
@@ -56,6 +75,7 @@
             android:theme="@style/Theme.ECommerceApp" />
 
 
+
     </application>
 
-</manifest>
+    </manifest>
