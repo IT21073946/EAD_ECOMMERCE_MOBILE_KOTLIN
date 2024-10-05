@@ -52,6 +52,27 @@
         android:name=".views.ApprovalListActivity"
         android:exported="true"
         android:label="Approval List" />
+      
+        <!-- ProductDetailActivity declaration -->
+        <activity
+            android:name=".ui.ProductDetailActivity"
+            android:exported="true"
+            android:label="Product Detail"
+            android:theme="@style/Theme.ECommerceApp" />
+
+        <!-- Register VendorRatingActivity -->
+        <activity
+            android:name=".ui.VendorRatingActivity"
+            android:exported="true"
+            android:label="Vendor Rating"
+            android:theme="@style/Theme.ECommerceApp" />
+
+        <!-- Register CartActivity -->
+        <activity
+            android:name=".ui.CartActivity"
+            android:exported="true"
+            android:label="Cart"
+            android:theme="@style/Theme.ECommerceApp" />
 
 
 
