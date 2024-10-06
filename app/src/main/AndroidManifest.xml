@@ -53,6 +53,7 @@
         android:exported="true"
         android:label="Approval List" />
 
+    <activity android:name=".views.UserProfileActivity" />
 
 
     </application>

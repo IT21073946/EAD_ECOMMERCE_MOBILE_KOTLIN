@@ -1,5 +1,6 @@
 package com.example.ecommerceapp.views
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -50,14 +51,26 @@ class LoginActivity : AppCompatActivity() {
 
         userController.loginUser(email, password) { success, message ->
             if (success) {
+                // Save the email after a successful login
+                saveLoggedInUserEmail(email)
+
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 // Navigate to HomeActivity after login
                 val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
                 finish()  // Close LoginActivity after navigating to home
             } else {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, message ?: "Login failed", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+    // Save email to SharedPreferences after login
+    private fun saveLoggedInUserEmail(email: String) {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("logged_in_email", email)
+        editor.apply()
+    }
+
 }

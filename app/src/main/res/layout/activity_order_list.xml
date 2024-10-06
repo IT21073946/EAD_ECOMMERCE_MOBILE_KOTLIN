@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.ApprovalListActivity">
+    tools:context=".views.OrderListActivity">
 
     <include
         layout="@layout/common_app_bar"
         android:id="@+id/appBar" />
 
-    <!-- RecyclerView to display list of users -->
+    <!-- RecyclerView to display list of orders -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/approvalRecyclerView"
+        android:id="@+id/orderRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"

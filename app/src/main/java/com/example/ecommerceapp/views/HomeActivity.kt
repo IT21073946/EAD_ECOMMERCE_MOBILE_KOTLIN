@@ -20,6 +20,13 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val invoiceButton = findViewById<LinearLayout>(R.id.invoiceButton)
+        invoiceButton.setOnClickListener {
+            // Navigate to UserApprovalScreen (ApprovalListActivity)
+            val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         // You can add similar OnClickListeners for other buttons like Invoice, Quotations, etc.
     }
 }
