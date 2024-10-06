@@ -1,4 +1,5 @@
 package com.example.ecommerceapp.models
+import java.io.Serializable
 
 data class Product(
     val id: String? = null,
@@ -10,5 +11,7 @@ data class Product(
     val stock: Int,
     val isActive: Boolean,
     val rating: Double,
-    val imageUrl: String? = null
-)
+    val base64Image: String? = null
+): Serializable
+
+

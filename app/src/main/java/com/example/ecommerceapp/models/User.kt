@@ -10,3 +10,4 @@ data class User(
     val profilePictureBase64: String? = null,
     val contactNumber: String? = null
 )
+
