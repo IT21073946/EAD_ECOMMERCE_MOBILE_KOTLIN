@@ -88,6 +88,7 @@
             android:label="Cart"
             android:theme="@style/Theme.ECommerceApp" />
 
+    <activity android:name=".views.UserProfileActivity" />
 
 
     </application>

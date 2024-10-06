@@ -1,28 +1,29 @@
 package com.example.ecommerceapp.controllers
 
 import android.content.Context
+import com.example.ecommerceapp.models.Order
 import android.util.Log
 import com.example.ecommerceapp.models.Order
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OrderController(private val context: Context) {
+class OrderController (private val context: Context) {
 
-    fun createOrder(order: Order, callback: (Boolean, String?) -> Unit) {
-        val call = ApiClient.orderApi.createOrder(order)
+    fun getOrders(callback: (List<Order>?, String?) -> Unit) {
+        val call = ApiClient.orderApi.getAllOrders()
 
-        call.enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+        call.enqueue(object : Callback<List<Order>> {
+            override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {
                 if (response.isSuccessful) {
-                    callback(true, "Order created successfully!")
+                    callback(response.body(), null)
                 } else {
-                    callback(false, "Failed to create order: ${response.message()}")
+                    callback(null, "Failed to fetch orders")
                 }
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                callback(false, "Error: ${t.message}")
+            override fun onFailure(call: Call<List<Order>>, t: Throwable) {
+                callback(null, "Error: ${t.message}")
             }
         })
     }

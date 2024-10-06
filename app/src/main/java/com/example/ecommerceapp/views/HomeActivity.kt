@@ -22,6 +22,13 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val invoiceButton = findViewById<LinearLayout>(R.id.invoiceButton)
+        invoiceButton.setOnClickListener {
+            // Navigate to UserApprovalScreen (ApprovalListActivity)
+            val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         val productListButton = findViewById<LinearLayout>(R.id.productListButton)
         productListButton.setOnClickListener {
             // Pass the userId to ProductListActivity
