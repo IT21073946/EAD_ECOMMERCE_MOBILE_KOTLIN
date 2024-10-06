@@ -8,35 +8,35 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerceapp.R
-import com.example.ecommerceapp.controllers.UserController
+import com.example.ecommerceapp.views.OrderAdapter
+import com.example.ecommerceapp.controllers.OrderController
+import com.example.ecommerceapp.models.Order
 
-class ApprovalListActivity : AppCompatActivity() {
+class OrderListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var userAdapter: UserApprovalAdapter
-    private lateinit var userController: UserController
+    private lateinit var orderAdapter: OrderAdapter
+    private lateinit var orderController: OrderController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_approval_list)
+        setContentView(R.layout.activity_order_list)
 
         // Initialize RecyclerView and Adapter
-        recyclerView = findViewById(R.id.approvalRecyclerView)
+        recyclerView = findViewById(R.id.orderRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        userAdapter = UserApprovalAdapter(mutableListOf())
-        recyclerView.adapter = userAdapter
+        orderAdapter = OrderAdapter(mutableListOf())
+        recyclerView.adapter = orderAdapter
 
-        // Fetch the list of pending user approvals from the server
-        fetchUserApprovals()
+        // Fetch the list of orders from the server
+        fetchOrders()
 
-        // Get reference to the common app bar's title TextView
+        // Set title for Order screen
         val titleTextView: TextView = findViewById(R.id.screenTitle)
+        titleTextView.text = "Order History"
 
-        // Set title for Home screen
-        titleTextView.text = "User Approval Requests"
-
-        // Hide the back button in Home screen
+        // Hide the back button if not needed
         val backIcon: ImageView = findViewById(R.id.backIcon)
         backIcon.visibility = View.GONE
 
@@ -47,13 +47,12 @@ class ApprovalListActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchUserApprovals() {
-        // You should call your API to get the list of pending user approvals.
-        userController = UserController(this)
+    private fun fetchOrders() {
+        orderController = OrderController(this)
 
-        userController.getPendingUsers { users ->
-            if (users != null) {
-                userAdapter.setUsers(users)
+        orderController.getOrders { orders, error ->
+            if (orders != null) {
+                orderAdapter.setOrders(orders)
             }
         }
     }

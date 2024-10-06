@@ -107,4 +107,98 @@ class UserController(private val context: Context) {
         val sharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
         return sharedPreferences.getString("jwt_token", null)
     }
+    // Function to update user profile
+    fun updateUserProfile(user: User, callback: (Boolean, String?) -> Unit) {
+        val call = ApiClient.userApi.updateUserProfile(user.email, user)  // Call updateUserProfile by email
+
+        call.enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    callback(true, "Profile updated successfully")
+                } else {
+                    callback(false, "Failed to update profile: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                callback(false, "Error: ${t.message}")
+            }
+        })
+    }
+
+    // Function to deactivate the user
+    fun deactivateUser(userEmail: String, callback: (Boolean, String?) -> Unit) {
+        // Fetch the user first
+        val callGetUser = ApiClient.userApi.getUserByEmail(userEmail)
+        callGetUser.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+                    val user = response.body()
+                    if (user != null) {
+                        // Set isActive to false to deactivate the user
+                        val updatedUser = user.copy(isActive = false)
+
+                        // Call updateUser API to deactivate the user
+                        val callUpdateUser = ApiClient.userApi.updateUser(user.id.toString(), updatedUser)
+                        callUpdateUser.enqueue(object : Callback<User> {
+                            override fun onResponse(call: Call<User>, response: Response<User>) {
+                                if (response.isSuccessful) {
+                                    callback(true, "Account deactivated")
+                                } else {
+                                    callback(false, "Failed to deactivate account")
+                                }
+                            }
+
+                            override fun onFailure(call: Call<User>, t: Throwable) {
+                                callback(false, "Error: ${t.message}")
+                            }
+                        })
+                    } else {
+                        callback(false, "User not found")
+                    }
+                } else {
+                    callback(false, "Failed to fetch user")
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                callback(false, "Error: ${t.message}")
+            }
+        })
+    }
+
+    fun getUserById(userId: String, callback: (User?) -> Unit) {
+        val call = ApiClient.userApi.getUserById(userId)
+        call.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+                    callback(response.body())
+                } else {
+                    callback(null)
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                callback(null)
+            }
+        })
+    }
+
+    fun getUserByEmail(email: String, callback: (User?, String?) -> Unit) {
+        val call = ApiClient.userApi.getUserByEmail(email)
+
+        call.enqueue(object : Callback<User> {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if (response.isSuccessful) {
+                    callback(response.body(), null)
+                } else {
+                    callback(null, "Failed to fetch user by email")
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                callback(null, "Error: ${t.message}")
+            }
+        })
+    }
 }

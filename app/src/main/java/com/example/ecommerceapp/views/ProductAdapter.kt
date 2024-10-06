@@ -1,8 +1,9 @@
-package com.example.ecommerceapp.ui
+package com.example.ecommerceapp.views
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ecommerceapp.databinding.ItemProductBinding
 import com.example.ecommerceapp.models.Product
 import com.squareup.picasso.Picasso
@@ -16,9 +17,14 @@ class ProductAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
+            // Set product name and price
             binding.productName.text = product.productName
             binding.productPrice.text = "$${product.price}"
-            Picasso.get().load(product.imageUrl).into(binding.productImage)
+
+            // Load image with Glide
+            Glide.with(binding.productImage.context).load(product.base64Image).into(binding.productImage)
+
+            // Set click listener
             binding.root.setOnClickListener {
                 onProductClick(product)
             }
@@ -41,4 +47,5 @@ class ProductAdapter(
     override fun getItemCount(): Int {
         return products.size
     }
+
 }

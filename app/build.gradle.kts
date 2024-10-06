@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.storage.CacheResetOnProcessCanceled.enabled
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -9,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.ecommerceapp"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -70,6 +72,7 @@ dependencies {
     // Firebase dependencies
     implementation(libs.firebase.inappmessaging)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.places)
 
 
 

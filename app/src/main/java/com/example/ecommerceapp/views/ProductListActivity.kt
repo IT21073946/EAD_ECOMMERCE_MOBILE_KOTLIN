@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.ecommerceapp.databinding.ActivityProductListBinding
-import com.example.ecommerceapp.ui.ProductAdapter
-import com.example.ecommerceapp.ui.ProductDetailActivity
+import com.example.ecommerceapp.views.ProductAdapter
+import com.example.ecommerceapp.views.ProductDetailActivity
 import com.example.ecommerceapp.viewmodel.ProductViewModel
 
 class ProductListActivity : AppCompatActivity() {
@@ -18,6 +18,7 @@ class ProductListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         // Initialize ViewBinding
         binding = ActivityProductListBinding.inflate(layoutInflater)
