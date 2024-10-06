@@ -1,19 +1,26 @@
 package com.example.ecommerceapp.views
-
+import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecommerceapp.controllers.OrderController
 import com.example.ecommerceapp.databinding.ActivityCardDetailsBinding
 import com.example.ecommerceapp.models.Cart
 import com.example.ecommerceapp.models.Order
-import com.example.ecommerceapp.models.Product
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 
 class CardDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCardDetailsBinding
     private lateinit var orderController: OrderController
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,24 +53,39 @@ class CardDetailsActivity : AppCompatActivity() {
     }
 
     // Create Order function
+
+    // Inside the createOrder function
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun createOrder(totalAmount: Double) {
         val cart = Cart.getInstance()
         val cartProducts = cart.getProducts()
 
+        if (cartProducts.isEmpty()) {
+            Toast.makeText(this, "Your cart is empty!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         // Hardcoded values
         val customerId = "66ed76db4441e38a23821c0f" // Replace with real value
         val shippingAddress = "456 Comfort Blvd, Springfield, IL 62701"
-        val status = "Shipped"
+        val status = "Pending"
         val isCancelled = false
+
+        // Assuming all products have the same vendorId
+        val vendorId = cartProducts.first().vendorId
+
+        // Get current date and time
+        val currentDate = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)
 
         val order = Order(
             customerId = customerId,
             products = cartProducts,
             totalAmount = totalAmount,
             status = status,
+            vendorId = vendorId,
             isCancelled = isCancelled,
             shippingAddress = shippingAddress,
-            vendorId = cartProducts.first().vendorId // Assuming all products have the same vendorId
+            orderDate = currentDate // Add the current date as orderDate
         )
 
         orderController.createOrder(order) { success, message ->
@@ -76,16 +98,18 @@ class CardDetailsActivity : AppCompatActivity() {
         }
     }
 
+
+
     // Restrict input fields and add formatting
     private fun setupInputRestrictions() {
-        binding.cardNumber.filters = arrayOf(android.text.InputFilter.LengthFilter(16))
-        binding.cvv.filters = arrayOf(android.text.InputFilter.LengthFilter(3))
-        binding.expDate.filters = arrayOf(android.text.InputFilter.LengthFilter(5))
+        binding.cardNumber.filters = arrayOf(InputFilter.LengthFilter(16))
+        binding.cvv.filters = arrayOf(InputFilter.LengthFilter(3))
+        binding.expDate.filters = arrayOf(InputFilter.LengthFilter(5))
 
-        binding.expDate.addTextChangedListener(object : android.text.TextWatcher {
+        binding.expDate.addTextChangedListener(object : TextWatcher {
             var isUpdating: Boolean = false
 
-            override fun afterTextChanged(s: android.text.Editable?) {
+            override fun afterTextChanged(s: Editable?) {
                 if (isUpdating) return
                 val input = s.toString().replace("/", "")
                 if (input.length >= 2) {
