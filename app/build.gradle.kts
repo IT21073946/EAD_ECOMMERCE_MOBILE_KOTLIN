@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.ecommerceapp"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -31,19 +31,25 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         compose = true
+        viewBinding = true // Enable View Binding
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -52,7 +58,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -61,9 +66,16 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.gridlayout)
+    
+    
+    // Firebase dependencies
     implementation(libs.firebase.inappmessaging)
     implementation(libs.firebase.firestore.ktx)
-    implementation(libs.androidx.gridlayout)
+    implementation(libs.places)
+
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,9 +83,21 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Retrofit for API calls
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+    // Material UI
     implementation(libs.material)
-    implementation(libs.logging.interceptor)
     implementation(libs.material.v190)
+
+    // OkHttp logging interceptor
+    implementation(libs.logging.interceptor)
+
+    // Glide for image loading
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.squareup.picasso:picasso:2.8")
+
 }

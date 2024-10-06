@@ -148,8 +148,9 @@
                 android:layout_marginTop="8dp"/>
         </LinearLayout>
 
+        <!-- Product List Button -->
         <LinearLayout
-            android:id="@+id/orderButton"
+            android:id="@+id/productListButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -162,17 +163,16 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/invoice_icon" /> <!-- Make sure you have this drawable -->
+                android:src="@drawable/product_icon" /> <!-- Add a relevant drawable -->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order History"
+                android:text="Product List"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="8dp"/>
         </LinearLayout>
-
     </androidx.gridlayout.widget.GridLayout>
 
     <!-- Bottom Navigation -->
@@ -188,4 +188,3 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
