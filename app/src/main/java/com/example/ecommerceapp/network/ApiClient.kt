@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val BASE_URL = "https://1f2f-103-21-166-85.ngrok-free.app"
+    private const val BASE_URL = "https://82b2-103-21-166-85.ngrok-free.app"
 
     // Retrieve JWT token from shared preferences
     private val userController: UserController by lazy { UserController(AppContext.get()) }

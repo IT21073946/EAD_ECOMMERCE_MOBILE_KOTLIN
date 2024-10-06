@@ -27,6 +27,13 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val orderButton = findViewById<LinearLayout>(R.id.orderButton)
+        orderButton.setOnClickListener {
+            // Navigate to UserApprovalScreen (ApprovalListActivity)
+            val intent = Intent(this, OrderListActivity::class.java)
+            startActivity(intent)
+        }
+
         // You can add similar OnClickListeners for other buttons like Invoice, Quotations, etc.
     }
 }
