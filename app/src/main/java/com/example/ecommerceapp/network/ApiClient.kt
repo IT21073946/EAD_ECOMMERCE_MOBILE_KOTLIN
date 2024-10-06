@@ -1,5 +1,6 @@
 import com.example.ecommerceapp.AppContext
 import com.example.ecommerceapp.controllers.UserController
+import com.example.ecommerceapp.network.OrderApi
 import com.example.ecommerceapp.network.ProductApi
 import com.example.ecommerceapp.network.UserApi
 import okhttp3.Interceptor
@@ -10,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val BASE_URL = "https://48ba-2402-4000-21c3-fa22-c426-a631-aed9-b24d.ngrok-free.app"
+    private const val BASE_URL = "https://684a-2402-4000-b240-5137-499-14f6-25d-1549.ngrok-free.app"
 
     // Retrieve JWT token from shared preferences
     private val userController: UserController by lazy { UserController(AppContext.get()) }
@@ -52,6 +53,11 @@ object ApiClient {
     // Initialize the Review API
     val reviewApi: ReviewApi by lazy {
         retrofit.create(ReviewApi::class.java)
+    }
+
+    // Initialize the Order API
+    val orderApi: OrderApi by lazy {
+        retrofit.create(OrderApi::class.java)
     }
 
 }
