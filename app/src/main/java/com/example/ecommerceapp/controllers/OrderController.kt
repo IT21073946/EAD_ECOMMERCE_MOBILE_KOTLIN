@@ -2,29 +2,49 @@ package com.example.ecommerceapp.controllers
 
 import android.content.Context
 import com.example.ecommerceapp.models.Order
-import android.util.Log
-import com.example.ecommerceapp.models.Order
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OrderController (private val context: Context) {
+class OrderController(private val context: Context) {
 
+    // Fetch all orders
     fun getOrders(callback: (List<Order>?, String?) -> Unit) {
         val call = ApiClient.orderApi.getAllOrders()
 
         call.enqueue(object : Callback<List<Order>> {
             override fun onResponse(call: Call<List<Order>>, response: Response<List<Order>>) {
                 if (response.isSuccessful) {
-                    callback(response.body(), null)
+                    callback(response.body(), null) // Success, pass the order list
                 } else {
-                    callback(null, "Failed to fetch orders")
+                    callback(null, "Failed to fetch orders: ${response.message()}") // Error message
                 }
             }
 
             override fun onFailure(call: Call<List<Order>>, t: Throwable) {
-                callback(null, "Error: ${t.message}")
+                callback(null, "Error: ${t.message}") // Network error or failure
             }
         })
     }
+
+
+        // Create a new order
+        fun createOrder(order: Order, callback: (Boolean, String?) -> Unit) {
+            val call = ApiClient.orderApi.createOrder(order)
+
+            call.enqueue(object : Callback<Order> {
+                override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                    if (response.isSuccessful) {
+                        callback(true, "Order created successfully!")
+                    } else {
+                        callback(false, "Failed to create order: ${response.message()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<Order>, t: Throwable) {
+                    callback(false, "Error: ${t.message}")
+                }
+            })
+        }
+
 }

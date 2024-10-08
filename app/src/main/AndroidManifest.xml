@@ -48,6 +48,12 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.ECommerceApp.NoActionBar" />
 
+        <activity
+            android:name=".views.UserProfileActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ECommerceApp.NoActionBar" />
+
     <activity
         android:name=".views.ApprovalListActivity"
         android:exported="true"
@@ -88,7 +94,12 @@
             android:label="Cart"
             android:theme="@style/Theme.ECommerceApp" />
 
-    <activity android:name=".views.UserProfileActivity" />
+        <!-- Review List Details -->
+        <activity
+            android:name=".views.ReviewActivity"
+            android:exported="true"
+            android:label="Review"
+            android:theme="@style/Theme.ECommerceApp" />
 
 
     </application>
