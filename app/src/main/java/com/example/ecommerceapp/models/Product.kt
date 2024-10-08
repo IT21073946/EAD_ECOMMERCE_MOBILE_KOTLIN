@@ -9,6 +9,7 @@ data class Product(
     val category: String? = null,
     val vendorId: String,
     val stock: Int,
+    val quantity: Int,
     val isActive: Boolean,
     val rating: Double,
     val base64Image: String? = null

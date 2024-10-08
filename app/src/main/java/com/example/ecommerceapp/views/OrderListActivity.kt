@@ -1,26 +1,32 @@
 package com.example.ecommerceapp.views
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerceapp.R
-import com.example.ecommerceapp.views.OrderAdapter
 import com.example.ecommerceapp.controllers.OrderController
-import com.example.ecommerceapp.models.Order
+import com.example.ecommerceapp.controllers.UserController
 
 class OrderListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var orderAdapter: OrderAdapter
     private lateinit var orderController: OrderController
+    private lateinit var userController: UserController
+    private lateinit var loggedInEmail: String
+    private lateinit var loggedInUserId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_list)
+
+        // Retrieve logged-in user's email from SharedPreferences
+        loggedInEmail = getLoggedInUserEmail()
 
         // Initialize RecyclerView and Adapter
         recyclerView = findViewById(R.id.orderRecyclerView)
@@ -29,31 +35,47 @@ class OrderListActivity : AppCompatActivity() {
         orderAdapter = OrderAdapter(mutableListOf())
         recyclerView.adapter = orderAdapter
 
-        // Fetch the list of orders from the server
-        fetchOrders()
+        // Fetch userId using the logged-in email
+        fetchUserIdByEmail()
 
-        // Set title for Order screen
-        val titleTextView: TextView = findViewById(R.id.screenTitle)
-        titleTextView.text = "Order History"
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar.setNavigationOnClickListener {
+            onBackPressed()  // Navigate back to the previous screen
+        }
 
-        // Hide the back button if not needed
-        val backIcon: ImageView = findViewById(R.id.backIcon)
-        backIcon.visibility = View.GONE
+    }
 
-        // Handle clicks for profile or notification icons if necessary
-        val profileIcon: ImageView = findViewById(R.id.profileIcon)
-        profileIcon.setOnClickListener {
-            // Do something when profile icon is clicked
+    private fun fetchUserIdByEmail() {
+        userController = UserController(this)
+
+        // Get user by email
+        userController.getUserByEmail(loggedInEmail) { user, error ->
+            if (user != null) {
+                loggedInUserId = user.id ?: ""
+                // Now fetch the orders based on the userId
+                fetchOrders()
+            } else {
+                Toast.makeText(this, error ?: "Failed to retrieve user details", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
     private fun fetchOrders() {
         orderController = OrderController(this)
 
-        orderController.getOrders { orders, error ->
+        // Fetch orders using the logged-in user's userId
+        orderController.getOrdersByCustomerId(loggedInUserId) { orders, error ->
             if (orders != null) {
                 orderAdapter.setOrders(orders)
+            } else {
+                Toast.makeText(this, error ?: "Failed to fetch orders", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    // Retrieve the logged-in user's email from SharedPreferences
+    private fun getLoggedInUserEmail(): String {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getString("logged_in_email", "") ?: ""
     }
 }

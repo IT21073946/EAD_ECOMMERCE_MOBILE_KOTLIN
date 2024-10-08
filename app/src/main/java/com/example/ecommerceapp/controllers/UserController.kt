@@ -201,4 +201,14 @@ class UserController(private val context: Context) {
             }
         })
     }
+
+    fun checkEmailExists(email: String, callback: (Boolean, String?) -> Unit) {
+        getUserByEmail(email) { user, error ->
+            if (user != null) {
+                callback(true, "Email already in use.")
+            } else {
+                callback(false, null) // Email does not exist, proceed
+            }
+        }
+    }
 }

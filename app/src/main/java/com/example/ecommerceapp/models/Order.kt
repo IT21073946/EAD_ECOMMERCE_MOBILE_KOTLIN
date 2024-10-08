@@ -6,8 +6,16 @@ data class Order(
     val customerId: String,
     val products: List<Product>?,
     val totalAmount: Double,
-    val status: String,
+    val status: String,  // This will store the numeric value of the status
     val isCancelled: Boolean,
     val shippingAddress: String,
-    val vendorId: String
-)
+    val cancellationNote: String?,
+    val vendorId: String?
+) {
+    // Helper function to convert status from int to enum and return its display name
+    fun getStatusName(): String {
+        return OrderStatus.fromString(status).statusName
+    }
+}
+
+

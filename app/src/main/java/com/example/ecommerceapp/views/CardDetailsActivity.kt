@@ -85,7 +85,8 @@ class CardDetailsActivity : AppCompatActivity() {
             vendorId = vendorId,
             isCancelled = isCancelled,
             shippingAddress = shippingAddress,
-            orderDate = currentDate // Add the current date as orderDate
+            orderDate = currentDate,
+            cancellationNote = ""
         )
 
         orderController.createOrder(order) { success, message ->

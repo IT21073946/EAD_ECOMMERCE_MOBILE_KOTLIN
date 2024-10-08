@@ -90,6 +90,9 @@
 
     <activity android:name=".views.UserProfileActivity" />
 
+        <activity android:name=".views.OrderListActivity" />
+        <activity android:name=".views.OrderProductListActivity" />
+
 
     </application>
 

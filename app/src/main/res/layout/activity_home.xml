@@ -58,12 +58,13 @@
         android:id="@+id/dashboardImage"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_marginTop="32dp"
         android:scaleType="centerCrop"
         android:src="@drawable/dashboard_image"
-        app:layout_constraintTop_toBottomOf="@id/greetingText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/greetingText" />
 
     <!-- Search Input -->
     <com.google.android.material.textfield.TextInputLayout
@@ -102,6 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
@@ -111,7 +113,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/sales_order_icon" />
+                android:src="@drawable/approve" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,6 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
@@ -137,7 +140,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/invoice_icon" /> <!-- Make sure you have this drawable -->
+                android:src="@drawable/user" /> <!-- Make sure you have this drawable -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -154,6 +157,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
@@ -169,6 +173,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Product List"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/orderListButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_corner"
+            android:padding="16dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sales_order_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order List"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="8dp"/>

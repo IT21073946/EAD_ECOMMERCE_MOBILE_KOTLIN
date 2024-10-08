@@ -35,5 +35,12 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, ProductListActivity::class.java)
             startActivity(intent)
         }
+
+        val orderListButton = findViewById<LinearLayout>(R.id.orderListButton)
+        orderListButton.setOnClickListener {
+            // Pass the userId to ProductListActivity
+            val intent = Intent(this, OrderListActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
