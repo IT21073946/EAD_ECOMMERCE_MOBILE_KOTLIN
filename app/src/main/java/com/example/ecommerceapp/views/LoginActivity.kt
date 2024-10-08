@@ -51,18 +51,22 @@ class LoginActivity : AppCompatActivity() {
 
         userController.loginUser(email, password) { success, message ->
             if (success) {
-                // Save the email after a successful login
+                // Extract userId from the response (assuming it's included in the LoginResponse)
+                val userId = message // Assuming message is where the userId is passed, adjust as needed
                 saveLoggedInUserEmail(email)
 
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                // Navigate to HomeActivity after login
+                Toast.makeText(this, "Login successful: $userId", Toast.LENGTH_SHORT).show()
+
+                // Pass the userId to the HomeActivity
                 val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra("USER_ID", userId)  // Add userId as extra to the intent
                 startActivity(intent)
                 finish()  // Close LoginActivity after navigating to home
             } else {
                 Toast.makeText(this, message ?: "Login failed", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     // Save email to SharedPreferences after login

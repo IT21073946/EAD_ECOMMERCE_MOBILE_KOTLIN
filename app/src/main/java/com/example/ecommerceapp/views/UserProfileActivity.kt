@@ -79,9 +79,10 @@ class UserProfileActivity : AppCompatActivity() {
         }
     }
 
-    // Populate UI fields with user data
+    // Populate UI fields with user data (showing UserId in the username field)
     private fun populateUserFields(user: User) {
-        usernameInput.setText(user.username)
+        val displayName = "${user.username} (ID: ${user.id})" // Append UserId to username
+        usernameInput.setText(displayName)
         emailInput.setText(user.email)
         contactNumberInput.setText(user.contactNumber)
     }
@@ -148,3 +149,4 @@ class UserProfileActivity : AppCompatActivity() {
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
 }
+

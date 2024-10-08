@@ -173,6 +173,32 @@
                 android:textColor="@android:color/black"
                 android:layout_marginTop="8dp"/>
         </LinearLayout>
+
+        <!-- Review List Button -->
+        <LinearLayout
+            android:id="@+id/reviewListButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:background="@drawable/rounded_corner"
+            android:padding="16dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/review" /> <!-- Add a relevant drawable -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Review List"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
     </androidx.gridlayout.widget.GridLayout>
 
     <!-- Bottom Navigation -->

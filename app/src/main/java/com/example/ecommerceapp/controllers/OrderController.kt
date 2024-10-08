@@ -27,24 +27,24 @@ class OrderController(private val context: Context) {
         })
     }
 
-    // Create a new order
-    fun createOrder(order: Order, callback: (Boolean, String?) -> Unit) {
-        val call = ApiClient.orderApi.createOrder(order)
 
-        call.enqueue(object : Callback<Order> {
-            override fun onResponse(call: Call<Order>, response: Response<Order>) {
-                if (response.isSuccessful) {
-                    callback(true, "Order created successfully!") // Success, notify the caller
-                } else {
-                    callback(false, "Failed to create order: ${response.message()}") // Error message
+        // Create a new order
+        fun createOrder(order: Order, callback: (Boolean, String?) -> Unit) {
+            val call = ApiClient.orderApi.createOrder(order)
+
+            call.enqueue(object : Callback<Order> {
+                override fun onResponse(call: Call<Order>, response: Response<Order>) {
+                    if (response.isSuccessful) {
+                        callback(true, "Order created successfully!")
+                    } else {
+                        callback(false, "Failed to create order: ${response.message()}")
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<Order>, t: Throwable) {
-                callback(false, "Error: ${t.message}") // Network error or failure
-            }
-        })
-    }
-
+                override fun onFailure(call: Call<Order>, t: Throwable) {
+                    callback(false, "Error: ${t.message}")
+                }
+            })
+        }
 
 }
