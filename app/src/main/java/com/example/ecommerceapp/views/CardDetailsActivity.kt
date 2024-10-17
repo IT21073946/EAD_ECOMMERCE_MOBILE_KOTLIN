@@ -1,4 +1,5 @@
 package com.example.ecommerceapp.views
+
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -16,7 +17,6 @@ import com.example.ecommerceapp.models.ProductInOrder
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-
 class CardDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCardDetailsBinding
@@ -31,9 +31,10 @@ class CardDetailsActivity : AppCompatActivity() {
         orderController = OrderController(this)
         setContentView(binding.root)
 
-        // Retrieve the total amount from the intent
+        // Retrieve the total amount and userId from the intent
         val totalAmount = intent.getDoubleExtra("totalAmount", 0.0)
         val userId = intent.getStringExtra("userId") ?: "" // Retrieve userId from the intent
+        val vendorId = intent.getStringExtra("vendorId") ?: "" // Retrieve vendorId from the intent
 
         val cart = Cart.getInstance()
         val cartProducts = cart.getProducts().toMutableList()
@@ -53,13 +54,11 @@ class CardDetailsActivity : AppCompatActivity() {
             val shippingAddress = binding.shippingAddress.text.toString().trim() // Retrieve the shipping address
 
             if (validateCardDetails(cardHolderName, cardNumber, expDate, cvv, shippingAddress)) {
-                // Create order after successful payment
                 if (cartProducts.isEmpty()) {
                     Toast.makeText(this, "Your cart is empty!", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Create order and store it in the database using API call
-                    createOrder(cartProducts, totalAmount, userId,shippingAddress)
-                }
+                    // Create order after successful payment
+                    createOrder(cartProducts, totalAmount, userId,shippingAddress)                }
             }
         }
     }
@@ -84,11 +83,9 @@ class CardDetailsActivity : AppCompatActivity() {
             customerId = userId,
             products = productsInOrder, // Pass the correctly formatted products list
             totalAmount = totalAmount,
-            status = status,
-            vendorId = vendorId,
-            isCancelled = isCancelled,
-            shippingAddress = shippingAddress,
-            orderDate = currentDate,
+            status = 0,
+            isCancelled = false,
+            shippingAddress = shippingAddress, // Replace with actual shipping address
             cancellationNote = ""
         )
 
@@ -102,8 +99,6 @@ class CardDetailsActivity : AppCompatActivity() {
             }
         }
     }
-
-
 
     // Restrict input fields and add formatting
     private fun setupInputRestrictions() {
@@ -131,6 +126,7 @@ class CardDetailsActivity : AppCompatActivity() {
         })
     }
 
+    // Validation for card details and shipping address
     private fun validateCardDetails(cardHolderName: String, cardNumber: String, expDate: String, cvv: String, shippingAddress: String): Boolean {
         return when {
             cardHolderName.isEmpty() -> {

@@ -43,17 +43,17 @@ class OrderAdapter(
             // Set order details
             orderDateTextView.text = "Order Date: ${order.orderDate}"
             totalAmountTextView.text = "Total: ${order.totalAmount}"
-            statusTextView.text = order.getStatusName()
+//            statusTextView.text = order.getStatusName()
 
             // Set color based on status
-            when (order.status) {
-                "Pending" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.grey))
-                "Cancelled" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.red))
-                "Processing" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.yellow))
-                "Delivered" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.green))
-                "PartiallyReady" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.blue))
-                "ReadyForShipment" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.orange))
-            }
+//            when (order.status) {
+//                "Pending" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.grey))
+//                "Cancelled" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.red))
+//                "Processing" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.yellow))
+//                "Delivered" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.green))
+//                "PartiallyReady" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.blue))
+//                "ReadyForShipment" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.orange))
+//            }
 
             // Handle product view button click
 //            viewProductsButton.setOnClickListener {

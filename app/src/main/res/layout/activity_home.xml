@@ -205,16 +205,4 @@
         </LinearLayout>
     </androidx.gridlayout.widget.GridLayout>
 
-    <!-- Bottom Navigation -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/green"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        <!-- Bottom navigation buttons like Home, Settings, Notifications -->
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
