@@ -49,5 +49,5 @@
         android:id="@+id/buyNowButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Buy Now" />
+        android:text="Checkout" />
 </LinearLayout>

@@ -12,7 +12,8 @@ data class Product(
     val quantity: Int,
     val isActive: Boolean,
     val rating: Double,
-    val base64Image: String? = null
+    val base64Image: String? = null,
+    val isReady: Boolean = true
 ): Serializable
 
 

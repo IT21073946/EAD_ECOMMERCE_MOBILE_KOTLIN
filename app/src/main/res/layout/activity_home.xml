@@ -178,12 +178,12 @@
                 android:layout_marginTop="8dp"/>
         </LinearLayout>
 
+        <!-- Review List Button -->
         <LinearLayout
-            android:id="@+id/orderListButton"
+            android:id="@+id/reviewListButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
             android:layout_margin="8dp"
             android:background="@drawable/rounded_corner"
             android:padding="16dp"
@@ -193,12 +193,12 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/sales_order_icon" />
+                android:src="@drawable/review" /> <!-- Add a relevant drawable -->
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Order List"
+                android:text="Review List"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="8dp"/>

@@ -21,6 +21,7 @@ class ReviewController : AppCompatActivity() {
         commentInput = findViewById(R.id.commentInput)
         submitButton = findViewById(R.id.submitButton)
 
+        // Initialize ReviewApi using Retrofit
         reviewApi = ApiClient.retrofit.create(ReviewApi::class.java)
 
         submitButton.setOnClickListener {
@@ -31,10 +32,10 @@ class ReviewController : AppCompatActivity() {
     private fun submitReview() {
         val rating = ratingBar.rating.toInt()
         val comment = commentInput.text.toString()
-        val userId = "66fdf2312956d4cb29ac6fb7" // Replace with actual user ID
-        val vendorId = "66edabc4692d23e8ebfdec69" // Replace with actual vendor ID
+        val userId = "66fdf2312956d4cb29ac6fb7" // Example user ID
+        val vendorId = "66edabc4692d23e8ebfdec69" // Example vendor ID
 
-        val newReview = Review(userId, vendorId, rating, comment)
+        val newReview = Review(id = null,userId, vendorId, rating, comment)
 
         reviewApi.postReview(newReview).enqueue(object : Callback<Review> {
             override fun onResponse(call: Call<Review>, response: Response<Review>) {
