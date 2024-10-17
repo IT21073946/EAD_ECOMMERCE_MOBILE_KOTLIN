@@ -48,20 +48,26 @@ class RegisterActivity : AppCompatActivity() {
             return
         }
 
-        // Create the user object
-        val user = User(
-            email = email,
-            username = username,
-            password = password,
-            role = "Customer"  // Adjust the role as needed
-        )
-
-        // Call the controller to register the user
-        userController.registerUser(user) { success, message ->
-            if (success) {
-                Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
+        // Check if the email already exists
+        userController.checkEmailExists(email) { exists, errorMessage ->
+            if (exists) {
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, message ?: "Registration failed", Toast.LENGTH_SHORT).show()
+                // Proceed with registration
+                val user = User(
+                    email = email,
+                    username = username,
+                    password = password,
+                    role = "Customer"  // Adjust the role as needed
+                )
+
+                userController.registerUser(user) { success, message ->
+                    if (success) {
+                        Toast.makeText(this, "Registration successful!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this, message ?: "Registration failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }

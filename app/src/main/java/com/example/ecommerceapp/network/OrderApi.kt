@@ -13,7 +13,7 @@ interface OrderApi {
     fun getAllOrders(): Call<List<Order>>
 
     @GET("api/Order/{id}")
-    fun getOrderById(@Path("id") orderId: String): Call<Order>
+    fun getOrderById(@Path("id") orderId: String): Call<Order>  // Fetch order by order ID
 
     @POST("api/Order")
     fun createOrder(@Body order: Order): Call<Order>
@@ -21,5 +21,6 @@ interface OrderApi {
     @PUT("api/Order/{id}")
     fun updateOrder(@Path("id") orderId: String, @Body order: Order): Call<Order>
 
-
+    @GET("api/Order/user/{customerId}")
+    fun getOrdersByCustomerId(@Path("customerId") customerId: String): Call<List<Order>>
 }

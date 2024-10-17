@@ -3,6 +3,7 @@ package com.example.ecommerceapp.views
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
@@ -65,6 +66,11 @@ class UserProfileActivity : AppCompatActivity() {
         deactivateButton.setOnClickListener {
             deactivateUserAccount()
         }
+
+        val backIcon = findViewById<ImageView>(R.id.backIcon)
+        backIcon.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     // Load user profile by email
@@ -85,6 +91,14 @@ class UserProfileActivity : AppCompatActivity() {
         usernameInput.setText(displayName)
         emailInput.setText(user.email)
         contactNumberInput.setText(user.contactNumber)
+
+        if (!user.profilePictureBase64.isNullOrEmpty()) {
+            val bitmap = base64ToBitmap(user.profilePictureBase64)
+            profileImageView.setImageBitmap(bitmap)
+        } else {
+            // Set a default image if the user doesn't have a profile picture
+            profileImageView.setImageResource(R.drawable.ic_user)  // Replace with your default image drawable
+        }
     }
 
     // Update user profile
@@ -148,5 +162,11 @@ class UserProfileActivity : AppCompatActivity() {
         val byteArray = byteArrayOutputStream.toByteArray()
         return Base64.encodeToString(byteArray, Base64.DEFAULT)
     }
+
+    private fun base64ToBitmap(base64String: String): Bitmap {
+        val decodedString: ByteArray = Base64.decode(base64String, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+    }
+
 }
 
