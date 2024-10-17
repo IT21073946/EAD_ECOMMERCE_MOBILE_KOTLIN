@@ -52,12 +52,12 @@ class OrderAdapter(
 
             // Set color based on status
             when (order.status) {
-                "0" -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.grey))
-                "7" -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))
-                "1" -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.yellow))
-                "6" -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.green))
-                "3" -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.blue))
-                "2" -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.orange))
+                0 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.grey))
+                7 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))
+                1 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.yellow))
+                6 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.green))
+                3 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.blue))
+                2 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.orange))
             }
         }
 

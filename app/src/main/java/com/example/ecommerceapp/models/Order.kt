@@ -10,4 +10,8 @@ data class Order(
     val isCancelled: Boolean,
     val shippingAddress: String,
     val cancellationNote: String?,
-)
+){
+    fun getStatusName(): String {
+        return OrderStatus.fromString(status.toString()).statusName
+    }
+}
