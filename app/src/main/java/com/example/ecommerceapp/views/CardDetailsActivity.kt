@@ -84,9 +84,11 @@ class CardDetailsActivity : AppCompatActivity() {
             customerId = userId,
             products = productsInOrder, // Pass the correctly formatted products list
             totalAmount = totalAmount,
-            status = 1, // Assuming "1" means order placed
-            isCancelled = false,
-            shippingAddress = shippingAddress, // Replace with actual shipping address
+            status = status,
+            vendorId = vendorId,
+            isCancelled = isCancelled,
+            shippingAddress = shippingAddress,
+            orderDate = currentDate,
             cancellationNote = ""
         )
 

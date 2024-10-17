@@ -6,18 +6,14 @@ data class Order(
     val customerId: String,
     val products: List<ProductInOrder>, // Use the modified product class
     val totalAmount: Double,
-    val status: Int, // Status should be an integer, not string
+    val status: String,  // This will store the numeric value of the status
     val isCancelled: Boolean,
     val shippingAddress: String,
-    val cancellationNote: String?
-)
-
-// Modified Product class for orders
-data class ProductInOrder(
-    val productId: String, // Backend expects productId, not id
-    val productName: String,
-    val price: Double,
-    val quantity: Int, // Backend requires quantity, add this field
-    val vendorId: String,
-    val isReady: Boolean = false
-)
+    val cancellationNote: String?,
+    val vendorId: String?
+) {
+    // Helper function to convert status from int to enum and return its display name
+    fun getStatusName(): String {
+        return OrderStatus.fromString(status).statusName
+    }
+}
