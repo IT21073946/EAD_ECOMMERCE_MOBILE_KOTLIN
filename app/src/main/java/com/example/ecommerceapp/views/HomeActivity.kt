@@ -36,6 +36,15 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        val reviewListButton = findViewById<LinearLayout>(R.id.reviewListButton)
+        reviewListButton.setOnClickListener {
+            // Navigate to ReviewActivity
+            val intent = Intent(this, ReviewActivity::class.java)
+            startActivity(intent)
+        }
+
+
         val orderListButton = findViewById<LinearLayout>(R.id.orderListButton)
         orderListButton.setOnClickListener {
             // Pass the userId to ProductListActivity

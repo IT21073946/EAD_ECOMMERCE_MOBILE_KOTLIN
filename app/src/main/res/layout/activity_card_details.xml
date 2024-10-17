@@ -1,61 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:ignore="ExtraText">
 
-    <!-- Card Holder Name -->
-    <EditText
-        android:id="@+id/cardHolderName"
+    <!-- Image at the top -->
+    <ImageView
+        android:id="@+id/cardImage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/payment_bg"
+        android:layout_gravity="top"
+        android:layout_marginBottom="20dp"/>
+
+    <!-- Content centered below the image -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Card Holder Name"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="16dp" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <!-- Card Number -->
-    <EditText
-        android:id="@+id/cardNumber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Card Number"
-        android:inputType="number"
-        android:layout_marginBottom="16dp" />
+        <!-- Card Holder Name -->
+        <EditText
+            android:id="@+id/cardHolderName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Card Holder Name"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="16dp" />
 
-    <!-- Expiration Date -->
-    <EditText
-        android:id="@+id/expDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Expiration Date (MM/YY)"
-        android:inputType="date"
-        android:layout_marginBottom="16dp" />
+        <!-- Card Number -->
+        <EditText
+            android:id="@+id/cardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Card Number"
+            android:inputType="number"
+            android:layout_marginBottom="16dp" />
 
-    <!-- CVV -->
-    <EditText
-        android:id="@+id/cvv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="CVV"
-        android:inputType="number"
-        android:layout_marginBottom="16dp" />
+        <!-- Expiration Date -->
+        <EditText
+            android:id="@+id/expDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Expiration Date (MM/YY)"
+            android:inputType="date"
+            android:layout_marginBottom="16dp" />
 
-    <!-- Total Amount Display -->
-    <TextView
-        android:id="@+id/totalAmountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total: $0.00"
-        android:textSize="18sp"
-        android:paddingBottom="16dp"
-        android:textStyle="bold"
-        android:layout_gravity="end" />
+        <!-- CVV -->
+        <EditText
+            android:id="@+id/cvv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CVV"
+            android:inputType="number"
+            android:layout_marginBottom="16dp" />
 
-    <!-- Pay Button -->
-    <Button
-        android:id="@+id/payButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pay Now" />
+        <!-- Shipping Address -->
+        <EditText
+            android:id="@+id/shippingAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Shipping Address"
+            android:inputType="textPostalAddress"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Total Amount Display -->
+        <TextView
+            android:id="@+id/totalAmountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total: $0.00"
+            android:textSize="18sp"
+            android:paddingBottom="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="end" />
+
+        <!-- Pay Button -->
+        <Button
+            android:id="@+id/payButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pay Now" />
+
+    </LinearLayout>
 </LinearLayout>
+

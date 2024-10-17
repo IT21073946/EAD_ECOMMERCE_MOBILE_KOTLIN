@@ -4,7 +4,7 @@ data class Order(
     val id: String? = null,
     val orderDate: String,
     val customerId: String,
-    val products: List<Product>?,
+    val products: List<ProductInOrder>, // Use the modified product class
     val totalAmount: Double,
     val status: String,  // This will store the numeric value of the status
     val isCancelled: Boolean,
@@ -17,5 +17,3 @@ data class Order(
         return OrderStatus.fromString(status).statusName
     }
 }
-
-

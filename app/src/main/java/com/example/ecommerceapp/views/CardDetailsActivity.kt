@@ -11,6 +11,8 @@ import com.example.ecommerceapp.controllers.OrderController
 import com.example.ecommerceapp.databinding.ActivityCardDetailsBinding
 import com.example.ecommerceapp.models.Cart
 import com.example.ecommerceapp.models.Order
+import com.example.ecommerceapp.models.Product
+import com.example.ecommerceapp.models.ProductInOrder
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -31,6 +33,10 @@ class CardDetailsActivity : AppCompatActivity() {
 
         // Retrieve the total amount from the intent
         val totalAmount = intent.getDoubleExtra("totalAmount", 0.0)
+        val userId = intent.getStringExtra("userId") ?: "" // Retrieve userId from the intent
+
+        val cart = Cart.getInstance()
+        val cartProducts = cart.getProducts().toMutableList()
 
         // Update the total amount TextView
         binding.totalAmountTextView.text = "Total: $$totalAmount"
@@ -44,42 +50,39 @@ class CardDetailsActivity : AppCompatActivity() {
             val cardNumber = binding.cardNumber.text.toString().trim()
             val expDate = binding.expDate.text.toString().trim()
             val cvv = binding.cvv.text.toString().trim()
+            val shippingAddress = binding.shippingAddress.text.toString().trim() // Retrieve the shipping address
 
-            if (validateCardDetails(cardHolderName, cardNumber, expDate, cvv)) {
+            if (validateCardDetails(cardHolderName, cardNumber, expDate, cvv, shippingAddress)) {
                 // Create order after successful payment
-                createOrder(totalAmount)
+                if (cartProducts.isEmpty()) {
+                    Toast.makeText(this, "Your cart is empty!", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Create order and store it in the database using API call
+                    createOrder(cartProducts, totalAmount, userId,shippingAddress)
+                }
             }
         }
     }
 
     // Create Order function
-
-    // Inside the createOrder function
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun createOrder(totalAmount: Double) {
-        val cart = Cart.getInstance()
-        val cartProducts = cart.getProducts()
-
-        if (cartProducts.isEmpty()) {
-            Toast.makeText(this, "Your cart is empty!", Toast.LENGTH_SHORT).show()
-            return
+    private fun createOrder(cartProducts: List<Product>, totalAmount: Double, userId: String, shippingAddress: String) {
+        // Convert cartProducts to match the backend's ProductInOrder format
+        val productsInOrder = cartProducts.map { product ->
+            ProductInOrder(
+                productId = product.id ?: "", // Use the product ID
+                productName = product.productName,
+                price = product.price,
+                quantity = 1,
+                vendorId = product.vendorId,
+                isReady = false
+            )
         }
 
-        // Hardcoded values
-        val customerId = "66ed76db4441e38a23821c0f" // Replace with real value
-        val shippingAddress = "456 Comfort Blvd, Springfield, IL 62701"
-        val status = "Pending"
-        val isCancelled = false
-
-        // Assuming all products have the same vendorId
-        val vendorId = cartProducts.first().vendorId
-
-        // Get current date and time
-        val currentDate = LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME)
-
         val order = Order(
-            customerId = customerId,
-            products = cartProducts,
+            orderDate =  LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME), // Example date, use actual date-time
+            customerId = userId,
+            products = productsInOrder, // Pass the correctly formatted products list
             totalAmount = totalAmount,
             status = status,
             vendorId = vendorId,
@@ -92,9 +95,10 @@ class CardDetailsActivity : AppCompatActivity() {
         orderController.createOrder(order) { success, message ->
             if (success) {
                 Toast.makeText(this, "Order created successfully!", Toast.LENGTH_SHORT).show()
-                finish() // Close the activity after creating the order
+                Cart.getInstance().clearCart()
+                finish() // Close CartActivity
             } else {
-                Toast.makeText(this, "Failed to create order: $message", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, message ?: "Failed to create order", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -127,7 +131,7 @@ class CardDetailsActivity : AppCompatActivity() {
         })
     }
 
-    private fun validateCardDetails(cardHolderName: String, cardNumber: String, expDate: String, cvv: String): Boolean {
+    private fun validateCardDetails(cardHolderName: String, cardNumber: String, expDate: String, cvv: String, shippingAddress: String): Boolean {
         return when {
             cardHolderName.isEmpty() -> {
                 showToast("Card holder name is required")
@@ -143,6 +147,10 @@ class CardDetailsActivity : AppCompatActivity() {
             }
             cvv.length != 3 -> {
                 showToast("CVV must be 3 digits")
+                false
+            }
+            shippingAddress.isEmpty() -> {
+                showToast("Shipping address is required")
                 false
             }
             else -> true
