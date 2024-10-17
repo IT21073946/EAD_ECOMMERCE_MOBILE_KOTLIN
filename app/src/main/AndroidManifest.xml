@@ -19,7 +19,7 @@
 
     <!-- RegisterActivity is the launcher activity -->
     <activity
-        android:name=".views.HomeActivity"
+        android:name=".views.LoginActivity"
         android:exported="true"
         android:label="@string/app_name"
         android:theme="@style/Theme.ECommerceApp.NoActionBar">
@@ -36,11 +36,11 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.ECommerceApp.NoActionBar" />
 
-<!--    <activity-->
-<!--        android:name=".views.HomeActivity"-->
-<!--        android:exported="true"-->
-<!--        android:label="@string/app_name"-->
-<!--        android:theme="@style/Theme.ECommerceApp.NoActionBar" />-->
+    <activity
+        android:name=".views.HomeActivity"
+        android:exported="true"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.ECommerceApp.NoActionBar" />
 
     <activity
         android:name=".views.RegisterActivity"
@@ -102,7 +102,7 @@
             android:theme="@style/Theme.ECommerceApp" />
 
         <activity android:name=".views.OrderListActivity" />
-        <activity android:name=".views.OrderProductListActivity" />
+<!--        <activity android:name=".views.OrderProductListActivity" />-->
 
 
     </application>
