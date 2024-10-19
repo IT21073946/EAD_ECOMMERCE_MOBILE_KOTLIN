@@ -13,7 +13,7 @@ enum class OrderStatus(val statusName: String, val statusCode: Int) {
     companion object {
         // Convert the status string to the corresponding enum
         fun fromString(value: String): OrderStatus {
-            return values().firstOrNull { it.statusName == value } ?: Pending
+            return values().firstOrNull { (it.statusCode).toString() == value } ?: Pending
         }
 
         // Convert the status code (Int) to the enum

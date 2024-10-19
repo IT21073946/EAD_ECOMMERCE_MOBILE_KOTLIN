@@ -130,13 +130,30 @@ class UserProfileActivity : AppCompatActivity() {
             userController.deactivateUser(email) { success, message ->
                 if (success) {
                     Toast.makeText(this, "Account deactivated", Toast.LENGTH_SHORT).show()
-                    // Handle logout or navigation after deactivation
+
+                    // Clear user session (if using SharedPreferences)
+                    clearUserSession()
+
+                    // Navigate to the login screen
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Clear the back stack
+                    startActivity(intent)
+                    finish() // Close the current activity
                 } else {
                     Toast.makeText(this, message ?: "Failed to deactivate account", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
+    // Clear user session (Optional)
+    private fun clearUserSession() {
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.remove("logged_in_email") // Clear the stored email or any other login data
+        editor.apply()
+    }
+
 
     // Get the logged-in user's email from SharedPreferences
     private fun getLoggedInUserEmail(): String {

@@ -10,6 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommerceapp.R
 import com.example.ecommerceapp.models.Order
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class OrderAdapter(
     private var orders: MutableList<Order>
@@ -37,31 +39,36 @@ class OrderAdapter(
         private val orderDateTextView: TextView = itemView.findViewById(R.id.orderDate)
         private val totalAmountTextView: TextView = itemView.findViewById(R.id.totalAmount)
         private val statusTextView: TextView = itemView.findViewById(R.id.status)
-        private val viewProductsButton: Button = itemView.findViewById(R.id.viewProductsButton)
+        private val shippingAddressTextView: TextView = itemView.findViewById(R.id.shippingAddress)
+
 
         fun bind(order: Order) {
-            // Set order details
-            orderDateTextView.text = "Order Date: ${order.orderDate}"
+            // Format the date to show only the date part
+            val formattedDate = formatDate(order.orderDate)
+            orderDateTextView.text = "Order Date: $formattedDate"
             totalAmountTextView.text = "Total: ${order.totalAmount}"
-//            statusTextView.text = order.getStatusName()
+            statusTextView.text = order.getStatusName()
+            shippingAddressTextView.text = "Shipment Address: ${order.shippingAddress}"
 
             // Set color based on status
-//            when (order.status) {
-//                "Pending" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.grey))
-//                "Cancelled" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.red))
-//                "Processing" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.yellow))
-//                "Delivered" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.green))
-//                "PartiallyReady" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.blue))
-//                "ReadyForShipment" -> statusTextView.setBackgroundColor(ContextCompat.getColor(itemView.context, R.color.orange))
-//            }
+            when (order.status) {
+                0 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.grey))
+                7 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))
+                1 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.yellow))
+                6 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.green))
+                3 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.blue))
+                2 -> statusTextView.setTextColor(ContextCompat.getColor(itemView.context, R.color.orange))
+            }
+        }
 
-            // Handle product view button click
-//            viewProductsButton.setOnClickListener {
-//                // Open a new activity to display products related to this order
-//                val intent = Intent(itemView.context, OrderProductListActivity::class.java)
-//                intent.putExtra("orderId", order.id)  // Pass the order ID to the next screen
-//                itemView.context.startActivity(intent)
-//            }
+
+        // Helper method to format the date string
+        private fun formatDate(orderDate: String): String {
+            // Parse the date string and format it to "yyyy-MM-dd"
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val date = inputFormat.parse(orderDate)
+            return outputFormat.format(date)
         }
     }
 }

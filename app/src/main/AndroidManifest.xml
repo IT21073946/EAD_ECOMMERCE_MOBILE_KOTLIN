@@ -102,6 +102,7 @@
             android:theme="@style/Theme.ECommerceApp" />
 
         <activity android:name=".views.OrderListActivity" />
+
 <!--        <activity android:name=".views.OrderProductListActivity" />-->
 
 
